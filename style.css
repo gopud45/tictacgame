@@ -1,122 +1,274 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&family=Roboto&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Edu+SA+Hand:wght@400..700&display=swap');
+/* Using a playful, rounded font for a modern feel */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
-    font-family: "Edu SA Hand", cursive;
+    font-family: 'Nunito', sans-serif; /* Default to Nunito for consistency */
 }
 
-nav{
-    background-color: rgb(37, 9, 37);
+body {
+    background-color: #E0F2F7; /* Light blue background inspired by some background tones */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+nav {
+    background-color: #3F51B5; /* A strong blue, like the grid lines in the image */
     color: white;
-    height: 65px;
-    font-size: 27px;
+    height: 70px; /* Slightly taller nav */
+    font-size: 30px;
     display: flex;
     align-items: center;
-    padding: 0 12px;
-    font-family: 'Roboto', sans-serif;
+    padding: 0 20px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-nav ul{
+nav ul {
     list-style-type: none;
 }
 
-.gameContainer{ 
+.gameContainer {
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    align-items: center;
+    flex-grow: 1; /* Allows container to take available space */
+    margin: 40px 0; /* Adjust vertical margin */
+    flex-wrap: wrap;
+    gap: 50px; /* Space between game board and info */
 }
 
-.container{
+.container {
     display: grid;
     grid-template-rows: repeat(3, 10vw);
     grid-template-columns: repeat(3, 10vw);
-    font-family: 'Roboto', sans-serif;
     position: relative;
+    background-color: white; /* White board */
+    border-radius: 25px; /* More rounded corners for the board */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Enhanced 3D shadow */
+    padding: 15px; /* Increase internal padding */
+    border: 6px solid #2196F3; /* Vibrant blue border, prominent */
 }
 
-.box{
-    border: 2px solid black;
+.box {
+    border: 3px solid #64B5F6; /* Lighter blue for internal grid lines */
     font-size: 8vw;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 12px; /* Rounded corners for individual cells */
+    transition: background-color 0.3s ease, transform 0.1s ease-out;
+    background-color: #F8F8F8; /* Slight off-white for cells */
 }
 
-.box:hover{
-    background-color: rgb(242, 234, 250);
+.box:hover {
+    background-color: #E3F2FD; /* Lighter blue on hover */
+    transform: scale(1.02); /* Slight scale on hover for a playful feel */
 }
+
+.boxtext {
+    font-weight: 800; /* Extra bold */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* More prominent shadow for 3D pop */
+    user-select: none; /* Prevent text selection */
+}
+
+/* Colors for X and O based on the image */
+.boxtext[data-value="X"] {
+    color: #F44336; /* Bright Red for X */
+    font-size: 9vw; /* Slightly larger for X to stand out */
+}
+
+.boxtext[data-value="O"] {
+    color: #00BCD4; /* Cyan for O */
+    font-size: 9vw; /* Slightly larger for O */
+}
+
 
 .info {
-    font-size: 22px;
+    font-size: 30px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
-.gameInfo{
-    padding: 0 34px;
-    font-family: 'Baloo Bhaina 2', cursive;
+.gameInfo {
+    padding: 0 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.gameInfo h1{
-    font-size: 2.5rem;
+.gameInfo h1 {
+    font-size: 3.5rem; /* Even larger heading */
+    color: #4A148C; /* Deep purple */
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
 }
 
-.imgbox img{
+.imgbox img {
     width: 0;
     transition: width 1s ease-in-out;
+    margin-top: 30px;
+    max-width: 100%; /* Ensure image doesn't overflow */
+    height: auto;
 }
 
-.br-0{
-    border-right: 0;
+/* Corner/Edge border removal for grid */
+/* These still need to be precise, let's redefine based on rounded corners */
+/* Instead of border:0, we define a transparent border or just rely on the main container border */
+
+.bt-0 {
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.bb-0 {
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.bl-0 {
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.br-0 {
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
-.bl-0{
-    border-left: 0;
+/* Specific border adjustments for corners so they match the rounded outer container */
+.box.bt-0.bl-0 {
+    border-top-left-radius: 12px; /* Match container's rounded corner minus padding/border offset */
+}
+.box.bt-0.br-0 {
+    border-top-right-radius: 12px;
+}
+.box.bb-0.bl-0 {
+    border-bottom-left-radius: 12px;
+}
+.box.bb-0.br-0 {
+    border-bottom-right-radius: 12px;
 }
 
-.bt-0{
-    border-top: 0;
-}
-
-.bb-0{
-    border-bottom: 0;
-}
 
 #reset {
-    margin: 0 23px;
-    padding: 1px 18px;
-    background: #f3e7f9;
-    border-radius: 6px;
+    margin: 20px 0;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, #FFC107, #FFEB3B); /* Yellow gradient for reset button */
+    color: #333;
+    border: none;
+    border-radius: 30px;
     cursor: pointer;
-    font-family: 'Baloo Bhaina 2';
-    font-size: 15px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
     font-weight: bolder;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    transition: all 0.3s ease;
 }
 
-.line{
-    background-color: black;
-    height: 3px;
+#reset:hover {
+    background: linear-gradient(45deg, #FFEB3B, #FFC107);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+    transform: translateY(-3px);
+}
+
+.line {
+    background-color: #F44336; /* Bright Red for winning line */
+    height: 7px; /* Thicker line */
     width: 0;
     position: absolute;
-    background-color: #911d91;
-    transition: width 1s ease-in-out;
+    border-radius: 7px; /* Rounded ends */
+    transition: width 1s ease-in-out, transform 1s ease-in-out;
+    z-index: 10; /* Ensure line is above boxes */
 }
 
-@media screen and (max-width: 950px)
-{
-    .gameContainer{
-        flex-wrap: wrap;
+/* Responsive adjustments */
+@media screen and (max-width: 950px) {
+    nav {
+        font-size: 25px;
+        height: 60px;
     }
-    .gameInfo{
-        margin-top: 34px;
+    .gameContainer {
+        flex-direction: column;
+        margin: 30px 0;
+        gap: 30px;
     }
-    .gameInfo h1{
-        font-size: 1.5rem;
-    }
-    .container { 
+    .container {
         grid-template-rows: repeat(3, 20vw);
         grid-template-columns: repeat(3, 20vw);
+        padding: 10px;
+        border-radius: 20px;
+        border: 5px solid #2196F3;
+    }
+    .box {
+        font-size: 8vw;
+        border: 2px solid #64B5F6;
+        border-radius: 10px;
+    }
+    .boxtext[data-value="X"], .boxtext[data-value="O"] {
+        font-size: 9vw;
+    }
+    .gameInfo h1 {
+        font-size: 2.8rem;
+    }
+    .info {
+        font-size: 26px;
+    }
+    #reset {
+        padding: 10px 25px;
+        font-size: 18px;
+    }
+    .line {
+        height: 6px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    nav {
+        font-size: 22px;
+        height: 55px;
+        padding: 0 15px;
+    }
+    .gameContainer {
+        margin: 20px 0;
+        gap: 20px;
+    }
+    .container {
+        grid-template-rows: repeat(3, 28vw);
+        grid-template-columns: repeat(3, 28vw);
+        padding: 8px;
+        border-radius: 15px;
+        border: 4px solid #2196F3;
+    }
+    .box {
+        font-size: 10vw;
+        border: 1px solid #64B5F6;
+        border-radius: 8px;
+    }
+    .boxtext[data-value="X"], .boxtext[data-value="O"] {
+        font-size: 11vw;
+    }
+    .gameInfo h1 {
+        font-size: 2.2rem;
+    }
+    .info {
+        font-size: 20px;
+    }
+    #reset {
+        padding: 8px 20px;
+        font-size: 16px;
+    }
+    .line {
+        height: 5px;
     }
 }
